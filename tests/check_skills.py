@@ -15,6 +15,16 @@ for path in skills:
     if not m:
         print(f"{path}: missing frontmatter"); ok = False; continue
     fm = m.group(1)
+    try:
+        import yaml  # type: ignore
+        parsed = yaml.safe_load(fm)
+        if not isinstance(parsed, dict) or "description" not in parsed:
+            print(f"{path}: frontmatter is not a mapping with a description"); ok = False
+    except ImportError:
+        if re.search(r"^description: [^\"'].*: ", fm, re.M):
+            print(f"{path}: unquoted description contains ': ' and will not parse as YAML"); ok = False
+    except Exception as exc:
+        print(f"{path}: frontmatter YAML error: {exc}"); ok = False
     name = re.search(r"^name: (.+)$", fm, re.M)
     if not name or name.group(1).strip() != path.parent.name:
         print(f"{path}: name must equal folder name"); ok = False

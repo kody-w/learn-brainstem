@@ -1,6 +1,6 @@
 ---
 name: brainstem-workshop
-description: Run one Academy workshop from the AIBAST Agents Library end to end: build the solution, pass its locked cases, capture evidence, and create a reviewed Draft in Copilot Studio without publishing. Use when the learner is ready to prove a solution or asks about workshops, evidence, or Copilot Studio. Teaches evals, evidence, and Draft versus publish.
+description: Run one Academy workshop from the AIBAST Agents Library end to end, building the solution, passing its locked cases, capturing evidence, and creating a reviewed Draft in Copilot Studio without publishing. Use when the learner is ready to prove a solution or asks about workshops, evidence, or Copilot Studio. Teaches evals, evidence, and Draft versus publish.
 license: MIT
 metadata:
   author: kody-w
