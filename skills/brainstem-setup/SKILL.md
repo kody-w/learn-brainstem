@@ -4,6 +4,7 @@ description: Install the RAPP Brainstem on the learner's machine, sign in with G
 license: MIT
 metadata:
   author: kody-w
+  version: "1.1.0"
   path: brainstem-setup
 ---
 
@@ -23,7 +24,8 @@ loop locally and borrows GitHub Copilot as the model, so there is no key to mana
    - macOS or Linux: `curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash`
    - Windows PowerShell: `irm https://kody-w.github.io/rapp-installer/install.ps1 | iex`
    The installer clones the source to `~/.brainstem/src`, creates a virtual environment, and
-   starts the server on port 7071.
+   starts the server on port 7071. When it runs through a pipe like this, the server keeps
+   running in the background after the installer returns; your terminal is free.
 3. If the server asks for GitHub sign-in, hand the device code to the learner. That is the one
    step they do themselves.
 4. Verify: `curl -s localhost:7071/health`. Read out three things from the JSON: the model, the
@@ -36,7 +38,9 @@ loop locally and borrows GitHub Copilot as the model, so there is no key to mana
      -d '{"user_input": "What can you do?"}'
    ```
 
-   The answer comes back in the `response` field. Show it.
+   The answer comes back in the `response` field. `agent_logs` shows which tools ran; it is
+   empty for a plain answer. Show both. On Windows PowerShell use `curl.exe`, not `curl`, which
+   is an alias for something else there.
 
 ## Point at the files
 
@@ -44,6 +48,15 @@ loop locally and borrows GitHub Copilot as the model, so there is no key to mana
   change one line of the personality, send the same message again, and notice the difference.
   Nothing restarts; the file is read on every request.
 - `~/.brainstem/src/rapp_brainstem/agents/` holds the tools. Each `*_agent.py` is one tool.
+
+## Start, stop, and start again
+
+- Start later: run `brainstem`. The installer put a launcher at `~/.local/bin/brainstem` on macOS
+  and Linux and `brainstem.cmd` on Windows. It runs in the foreground; Ctrl-C stops it.
+- Check whether one is already running: `curl -s localhost:7071/health`.
+- Stop a background one: find the process listening on 7071 and end it
+  (`lsof -i :7071` on macOS or Linux, `Get-NetTCPConnection -LocalPort 7071` on Windows).
+- Update: rerun the install one-liner; it skips work already done.
 
 ## Done when
 
@@ -54,8 +67,12 @@ loop locally and borrows GitHub Copilot as the model, so there is no key to mana
 ## Teach-back
 
 1. Where does the model run, and what credential does it use?
+   A good answer: the model runs behind GitHub Copilot, not on the machine; the only credential
+   is the learner's GitHub sign-in; there is no API key anywhere.
 2. What file changes the agent's personality, and when is it read?
+   A good answer: `soul.md`; on every request; nothing restarts.
 3. What is the one endpoint everything goes through?
+   A good answer: `POST /chat`, with `user_input` in and `response` out.
 
 Next: `brainstem-first-agent`.
 

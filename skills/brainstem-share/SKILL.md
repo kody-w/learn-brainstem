@@ -4,6 +4,7 @@ description: Turn the learner's agent into one skill file with rapp-skills, prov
 license: MIT
 metadata:
   author: kody-w
+  version: "1.1.0"
   path: brainstem-share
 ---
 
@@ -17,7 +18,9 @@ the same file, byte for byte. Sharing an agent is sending one file. Nothing to i
 
 ## Steps
 
-1. Get the converter. It is one file: https://github.com/kody-w/rapp-skills. Clone it or fetch `rapp_skills.py`.
+1. Get the converter: `git clone https://github.com/kody-w/rapp-skills`. Run it from that folder.
+   The `rapp_skills.py` at the root is a launcher that forwards to the converter inside
+   `skills/rapp-skills/scripts/`, so fetching the root file alone will not work; clone the repo.
    Python 3.11 or newer, nothing else.
 2. Convert the agent from `brainstem-first-agent`:
 
@@ -51,7 +54,10 @@ the same file, byte for byte. Sharing an agent is sending one file. Nothing to i
 ## Teach-back
 
 1. What is inside the `SKILL.md`, and why does that matter for sharing?
+   A good answer: the instructions, the code, and a launcher; one file is the whole thing.
 2. What did `prove` check?
+   A good answer: that agent to skill and back returns the identical bytes.
 3. If the Brainstem disappeared tomorrow, what would you still have?
+   A good answer: the skills folder, which runs anywhere that reads skills.
 
 Next: `brainstem-anywhere`.

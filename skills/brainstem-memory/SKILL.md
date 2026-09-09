@@ -4,6 +4,7 @@ description: Give the learner's Brainstem memory that survives across sessions u
 license: MIT
 metadata:
   author: kody-w
+  version: "1.1.0"
   path: brainstem-memory
 ---
 
@@ -27,7 +28,9 @@ stored context into every turn, and `ManageMemory`, which the model calls to sav
 4. New session again. Ask the question. Now it knows. Show the `<memory>` block that the
    Brainstem injected into the system context for that request.
 5. Ask it to forget, and confirm it forgot.
-6. Show where the memory file lives on disk and open it. Memory is a file; there is no magic.
+6. Show where the memory lives on disk and open it. Shared memory is
+   `~/.brainstem/src/rapp_brainstem/.brainstem_data/shared_memories/memory.json`; per-user memory
+   is under `.brainstem_data/memory/<guid>/user_memory.json`. Memory is a file; there is no magic.
 
 ## Done when
 
@@ -37,7 +40,10 @@ stored context into every turn, and `ManageMemory`, which the model calls to sav
 ## Teach-back
 
 1. Why did the model not know the colour in a new session, even though you had just said it?
+   A good answer: the model has no memory; the earlier turn was only in that session's context.
 2. What is the difference between conversation history and memory here?
+   A good answer: history is the turns of one session; memory is stored state injected on request.
 3. Where would this memory need to live if the agent ran for a team instead of one person?
+   A good answer: somewhere shared and durable, not a file on one laptop.
 
 Next: `brainstem-share`.

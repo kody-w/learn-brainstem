@@ -1,0 +1,31 @@
+name: check
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "17 6 * * 1"   # weekly: catch drift in the repos the lessons depend on
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  skills:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - run: python3 tests/check_skills.py
+      - name: Live contract (installer, Brainstem endpoints, registry, rapp-skills)
+        id: live
+        run: python3 tests/check_live.py 2>&1 | tee live.txt
+      - name: File an issue when the live contract drifts
+        if: failure() && github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          body="$(cat live.txt)"
+          existing=$(gh issue list --label drift --state open --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then gh issue comment "$existing" --body "$body"; else gh issue create --title "Live contract drift" --label drift --body "$body"; fi

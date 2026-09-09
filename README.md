@@ -46,6 +46,12 @@ Read https://raw.githubusercontent.com/kody-w/learn-brainstem/main/skills/learn-
 Each skill ends with a teach-back: you explain the concept, your AI asks three questions, and
 you only move on when you can answer them.
 
+## What your AI needs
+
+A terminal, a file system, and the web: Claude Code, GitHub Copilot CLI, Cursor, or Microsoft
+Scout. A chat window with no terminal cannot run the lessons. Removing everything afterwards is
+one command; the entry skill has it.
+
 ## What your AI does, and what you do
 
 Your AI runs the terminal, writes the files, and checks the results. You read, answer, and
@@ -62,7 +68,11 @@ that are yours. Learn on synthetic or throwaway data, never on someone's work da
 ## Check the skills
 
 ```bash
-python3 tests/check_skills.py
+python3 tests/check_skills.py   # structure and separation
+python3 tests/check_live.py     # the installer, endpoints, registry and converter the lessons quote
 ```
+
+CI runs both on every push and weekly, and files an issue if something the lessons depend on
+moves. Skill versions are in each file's frontmatter; see `CHANGELOG.md`.
 
 MIT licensed.

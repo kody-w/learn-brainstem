@@ -4,6 +4,7 @@ description: Write the learner's first tool as a single Python file, drop it int
 license: MIT
 metadata:
   author: kody-w
+  version: "1.1.0"
   path: brainstem-first-agent
 ---
 
@@ -20,7 +21,8 @@ the model writes the answer. That menu is the `metadata`; the Python is `perform
 1. Ask what small, real thing they want the AI to be able to do for them. Something with an
    obvious answer they can check: a unit conversion, a lookup in a list they give you, a date
    calculation. Avoid anything that needs a password or their data.
-2. Write one file in `~/.brainstem/src/rapp_brainstem/agents/`, named `<thing>_agent.py`.
+2. Write one file in `~/.brainstem/src/rapp_brainstem/agents/` (same path under the user's home
+   folder on Windows), named `<thing>_agent.py`.
    The shape is fixed:
 
    ```python
@@ -66,7 +68,11 @@ the model writes the answer. That menu is the `metadata`; the Python is `perform
 ## Teach-back
 
 1. What does the model actually send when it wants a tool to run?
+   A good answer: the tool's name and a JSON object of arguments; not code.
 2. Which part of the file does the model read, and which part does it never see?
+   A good answer: it reads `metadata` (the name, description, and parameter schema); it never
+   sees `perform`, only its return value.
 3. Why did changing one sentence change whether the tool was used?
+   A good answer: the description is the only thing the model has to decide with.
 
 Next: `brainstem-library`.

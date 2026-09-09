@@ -4,6 +4,7 @@ description: Show the learner where an agent actually lives once it works, using
 license: MIT
 metadata:
   author: kody-w
+  version: "1.1.0"
   path: brainstem-anywhere
 ---
 
@@ -40,7 +41,10 @@ skill is what they keep.
 ## Teach-back
 
 1. Why is the Brainstem the last rung and not the first?
+   A good answer: native tools already run the loop; the Brainstem is for when nothing native exists.
 2. What stays the same when a skill moves from the Brainstem to a native tool?
+   A good answer: the file and what it does; only where it runs changes.
 3. What would make you climb back down a rung?
+   A good answer: no platform, no network, or no account for what you need.
 
 That is the whole path. Start it again with their own use case.

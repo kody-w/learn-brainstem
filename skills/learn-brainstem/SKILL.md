@@ -4,6 +4,7 @@ description: Teach someone AI by doing, on their own machine, with the RAPP Brai
 license: MIT
 metadata:
   author: kody-w
+  version: "1.1.0"
   path: learn-brainstem
 ---
 
@@ -28,6 +29,25 @@ Say that in one sentence, then start. Do not lecture. Every concept below is lea
 | `brainstem-share` | One file that travels; nothing lost on the way | Their agent runs as a skill somewhere else |
 | `brainstem-anywhere` | Where agents live; the Brainstem as last resort | Their skill runs in a native AI tool |
 
+## If you only have this file
+
+The other six skills are not in your context yet. Fetch each one from its URL when the path
+reaches it, and follow that file, not your memory of it:
+
+- `brainstem-setup`: https://raw.githubusercontent.com/kody-w/learn-brainstem/main/skills/brainstem-setup/SKILL.md
+- `brainstem-first-agent`: https://raw.githubusercontent.com/kody-w/learn-brainstem/main/skills/brainstem-first-agent/SKILL.md
+- `brainstem-registry`: https://raw.githubusercontent.com/kody-w/learn-brainstem/main/skills/brainstem-registry/SKILL.md
+- `brainstem-memory`: https://raw.githubusercontent.com/kody-w/learn-brainstem/main/skills/brainstem-memory/SKILL.md
+- `brainstem-share`: https://raw.githubusercontent.com/kody-w/learn-brainstem/main/skills/brainstem-share/SKILL.md
+- `brainstem-anywhere`: https://raw.githubusercontent.com/kody-w/learn-brainstem/main/skills/brainstem-anywhere/SKILL.md
+
+## What your host needs
+
+Before anything else, confirm you can do three things from here: run a terminal command, write a
+file on the learner's machine, and fetch a URL. Claude Code, GitHub Copilot CLI, Cursor, and
+Microsoft Scout can. A chat window without a terminal cannot; if that is where you are, say so
+and point the learner at one of those tools. Do not narrate commands for the learner to type.
+
 ## How to run this
 
 1. Ask two questions, then stop asking: what they want to be able to do with AI, and whether
@@ -47,6 +67,14 @@ Say that in one sentence, then start. Do not lecture. Every concept below is lea
 - RAR, the open registry of single-file agents: https://kody-w.github.io/RAR/
 - rapp-skills, one file that is a skill and an agent: https://github.com/kody-w/rapp-skills
 - Why it is built this way: https://github.com/kody-w/rapp-mission
+
+## Undo everything
+
+When the learner is done, or wants a clean machine, this removes it all and nothing else:
+
+- macOS or Linux: `rm -rf ~/.brainstem ~/.local/bin/brainstem`
+- Windows PowerShell: `Remove-Item -Recurse -Force ~\.brainstem`
+- Their skills folder from `brainstem-share` is theirs; leave it.
 
 ## Rules
 
