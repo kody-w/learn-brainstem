@@ -4,7 +4,7 @@ description: Show the learner where an agent actually lives once it works, using
 license: MIT
 metadata:
   author: kody-w
-  version: "1.1.0"
+  version: "1.2.0"
   path: brainstem-anywhere
 ---
 
@@ -30,7 +30,8 @@ skill is what they keep.
    cloud path: https://kody-w.github.io/rapp-installer/. Do not install it now. Explain when you would.
 5. Ask the learner for one real thing from their life or work that they want an agent for.
    Write, with them, which rung it belongs on and why. That paragraph is the deliverable.
-6. Send them back to `brainstem-first-agent` with that use case. The loop starts again, faster.
+6. If their use case belongs in Copilot Studio, Teams, or Microsoft 365 Copilot, go to
+   `brainstem-ship`. Otherwise send them back to `brainstem-first-agent` with that use case.
 
 ## Done when
 
@@ -47,4 +48,4 @@ skill is what they keep.
 3. What would make you climb back down a rung?
    A good answer: no platform, no network, or no account for what you need.
 
-That is the whole path. Start it again with their own use case.
+Next: `brainstem-ship`, or start the path again with their own use case.

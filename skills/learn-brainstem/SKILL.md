@@ -4,7 +4,7 @@ description: Teach someone AI by doing, on their own machine, with the RAPP Brai
 license: MIT
 metadata:
   author: kody-w
-  version: "1.1.0"
+  version: "1.2.0"
   path: learn-brainstem
 ---
 
@@ -28,6 +28,7 @@ Say that in one sentence, then start. Do not lecture. Every concept below is lea
 | `brainstem-memory` | Context versus memory, state across turns | The agent remembers across sessions |
 | `brainstem-share` | One file that travels; nothing lost on the way | Their agent runs as a skill somewhere else |
 | `brainstem-anywhere` | Where agents live; the Brainstem as last resort | Their skill runs in a native AI tool |
+| `brainstem-ship` | Harnesses; Copilot Studio, Teams, Microsoft 365 Copilot | Their skill runs in the GitHub Copilot harness, then further |
 
 ## If you only have this file
 
@@ -40,6 +41,7 @@ reaches it, and follow that file, not your memory of it:
 - `brainstem-memory`: https://raw.githubusercontent.com/kody-w/learn-brainstem/main/skills/brainstem-memory/SKILL.md
 - `brainstem-share`: https://raw.githubusercontent.com/kody-w/learn-brainstem/main/skills/brainstem-share/SKILL.md
 - `brainstem-anywhere`: https://raw.githubusercontent.com/kody-w/learn-brainstem/main/skills/brainstem-anywhere/SKILL.md
+- `brainstem-ship`: https://raw.githubusercontent.com/kody-w/learn-brainstem/main/skills/brainstem-ship/SKILL.md
 
 ## What your host needs
 
@@ -66,6 +68,7 @@ and point the learner at one of those tools. Do not narrate commands for the lea
 - The Brainstem and its installer: https://kody-w.github.io/rapp-installer/
 - RAR, the open registry of single-file agents: https://kody-w.github.io/RAR/
 - rapp-skills, one file that is a skill and an agent: https://github.com/kody-w/rapp-skills
+- copilot-harness-sdk, one client for every GitHub Copilot harness: https://github.com/kody-w/copilot-harness-sdk
 - Why it is built this way: https://github.com/kody-w/rapp-mission
 
 ## Undo everything

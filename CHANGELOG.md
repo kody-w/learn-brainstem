@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.3.0 (2026-09-09)
+
+- New `brainstem-ship`: the skill runs in the GitHub Copilot harness on the learner's machine
+  (proved live), becomes the skill of a Copilot Studio harness agent, is reached from code, and
+  is opened to Teams and Microsoft 365 Copilot, all through copilot-harness-sdk. Rungs 2 to 4
+  are written from the SDK's source and README and not yet run end to end here.
+- Validator no longer treats Copilot Studio as foreign; it is a target, not a library.
+- Live check covers the SDK's exports, deploy script, and the harness YAML shapes.
+
 ## 1.2.0 (2026-09-09)
 
 - Registry: skip agents the Brainstem already bundles, pass `sha256` to the import so the

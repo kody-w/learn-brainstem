@@ -6,7 +6,7 @@ teaches you, one concept at a time, using the RAPP Brainstem as the lab bench.
 The [Brainstem](https://kody-w.github.io/rapp-installer/) is a small local server, powered by GitHub Copilot, that runs the
 real agent loop, system prompt, tools, model, answer, from plain Python files. No keys to
 manage, nothing to ship. It is where you learn and prototype. What you build leaves as one
-file that any AI tool can read. [Why it is built this way.](https://github.com/kody-w/rapp-mission)
+file that any AI tool can read, and can be pushed into Copilot Studio, Teams, and Microsoft 365 Copilot. [Why it is built this way.](https://github.com/kody-w/rapp-mission)
 
 ## Install
 
@@ -42,6 +42,7 @@ Read https://raw.githubusercontent.com/kody-w/learn-brainstem/main/skills/learn-
 | `brainstem-memory` | Context versus memory, state across turns | The agent remembers across sessions |
 | `brainstem-share` | One file that travels; nothing lost on the way | Your agent runs as a skill somewhere else |
 | `brainstem-anywhere` | Where agents live; the Brainstem as last resort | Your skill runs in a native AI tool |
+| `brainstem-ship` | Harnesses; Copilot Studio, Teams, Microsoft 365 Copilot | Your skill runs in the GitHub Copilot harness, then further |
 
 Each skill ends with a teach-back: you explain the concept, your AI asks three questions, and
 you only move on when you can answer them.
@@ -64,6 +65,7 @@ that are yours. Learn on synthetic or throwaway data, never on someone's work da
 - RAR, the open registry of single-file agents: https://kody-w.github.io/RAR/
 - rapp-skills, the converter and the one-file idea: https://github.com/kody-w/rapp-skills
 - The charter and the fallback ladder: https://github.com/kody-w/rapp-mission
+- copilot-harness-sdk, one client and one deploy for every GitHub Copilot harness: https://github.com/kody-w/copilot-harness-sdk
 
 ## Check the skills
 

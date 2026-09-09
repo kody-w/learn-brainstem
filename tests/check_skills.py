@@ -5,15 +5,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REQUIRED_SECTIONS = ("## Done when", "## Teach-back")
-FOREIGN = ("aibast", "microsoft.github.io", "copilot studio", "academy")  # this repo stands on its own
+FOREIGN = ("aibast", "microsoft.github.io", "academy")  # this repo stands on its own
 ok = True
 skills = sorted((ROOT / "skills").glob("*/SKILL.md"))
 readme = (ROOT / "README.md").read_text(encoding="utf-8").lower()
-for word in ("aibast", "microsoft.github.io", "copilot studio", "academy"):
+for word in ("aibast", "microsoft.github.io", "academy"):
     if word in readme:
         print(f"README.md: references {word!r}"); ok = False
-if len(skills) < 7:
-    print(f"expected at least 7 skills, found {len(skills)}"); ok = False
+if len(skills) < 8:
+    print(f"expected at least 8 skills, found {len(skills)}"); ok = False
 for path in skills:
     text = path.read_text(encoding="utf-8")
     m = re.match(r"^---\n(.*?)\n---\n", text, re.DOTALL)

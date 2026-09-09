@@ -12,6 +12,7 @@ RAR_RAW = "https://raw.githubusercontent.com/kody-w/RAR/main"
 SKILLS_RAW = "https://raw.githubusercontent.com/kody-w/rapp-skills/main/skills/rapp-skills/scripts/rapp_skills.py"
 SKILLS_LAUNCHER = "https://raw.githubusercontent.com/kody-w/rapp-skills/main/rapp_skills.py"
 MISSION = "https://github.com/kody-w/rapp-mission"
+SDK_RAW = "https://raw.githubusercontent.com/kody-w/copilot-harness-sdk/main"
 failures = []
 
 def get(url):
@@ -59,6 +60,26 @@ check("runpy" in get(SKILLS_LAUNCHER).decode(), "rapp-skills root launcher chang
 for verb in ("to-skill", "to-agent", "check", "prove", "run"):
     check(re.search(rf"[\"']{verb}[\"']", rs) is not None, f"rapp_skills.py lost verb {verb}")
 check(get(MISSION)[:15].startswith(b"<!DOCTYPE") or True, "rapp-mission unreachable")
+
+# copilot-harness-sdk facts quoted in brainstem-ship. The repository is private as of
+# 2026-09-09; until it is public these checks are skipped (with a notice) instead of failing.
+try:
+    idx = get(f"{SDK_RAW}/index.js").decode()
+    sdk_public = True
+except urllib.error.HTTPError as exc:
+    sdk_public = False
+    print(f"notice: copilot-harness-sdk not readable anonymously ({exc.code}); brainstem-ship rungs 2-4 need access; SDK checks skipped")
+if sdk_public:
+    for name in ("HarnessClient", "createDeviceCodeTokenProvider", "assertHarnessAgent", "setChannels", "shareAgent", "ClassicAgentError"):
+        check(name in idx, f"copilot-harness-sdk index.js lost export {name}")
+    pkg = json.loads(get(f"{SDK_RAW}/package.json"))
+    check("deploy:harness" in pkg.get("scripts", {}), "copilot-harness-sdk lost the deploy:harness script")
+    dep = get(f"{SDK_RAW}/scripts/deploy-harness-agent.mjs").decode()
+    check("workspace-dir" in dep and "publisher-prefix" in dep, "deploy-harness-agent.mjs lost --workspace-dir or --publisher-prefix")
+    beh = get(f"{SDK_RAW}/usecases/vendor-contract-renewal/agent/behaviors/risk-report.mcs.yml").decode()
+    check("kind: InlineAgentSkill" in beh and "content: |" in beh, "InlineAgentSkill behavior shape changed")
+    st = get(f"{SDK_RAW}/usecases/vendor-contract-renewal/agent/settings.mcs.yml").decode()
+    check("template: cliagent-1.0.0" in st and "CLICopilotRecognizer" in st, "harness settings.mcs.yml shape changed")
 
 print("live contract ok" if not failures else "LIVE CONTRACT DRIFT:\n- " + "\n- ".join(failures))
 sys.exit(1 if failures else 0)
