@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.0 (2026-09-09)
+
+- Registry: skip agents the Brainstem already bundles, pass `sha256` to the import so the
+  Brainstem verifies integrity itself, and handle the 409 name conflict. Found by running the
+  lesson against a live Brainstem.
+- Memory: rewritten to what the Brainstem does. It saves a stated preference on its own, and
+  "forget" records a retraction rather than erasing. The counterfactual is proved by moving
+  the memory file aside. Found the same way.
+
 Skills carry `metadata.version`. Bump it when a lesson's steps change so a learner who reinstalls
 can tell.
 

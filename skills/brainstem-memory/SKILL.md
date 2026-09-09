@@ -1,10 +1,10 @@
 ---
 name: brainstem-memory
-description: Give the learner's Brainstem memory that survives across sessions using the bundled ContextMemory and ManageMemory agents, then show the difference between context and memory. Use when someone asks why the AI forgets, how memory works, or how state is kept. Teaches context windows, injected context, and stored state.
+description: Show the learner how the Brainstem remembers across sessions with the bundled ContextMemory and ManageMemory agents, that memory is a file it writes on its own, and that forgetting is a design choice. Use when someone asks why the AI forgets, how memory works, or how state is kept. Teaches context windows, injected context, and stored state.
 license: MIT
 metadata:
   author: kody-w
-  version: "1.1.0"
+  version: "1.2.0"
   path: brainstem-memory
 ---
 
@@ -14,36 +14,43 @@ metadata:
 
 A model has no memory. It has a context window, and everything it "remembers" was put into
 that window on this request by something outside the model. Memory is state you store and
-inject. The Brainstem bundles two agents for exactly that: `ContextMemory`, which injects
-stored context into every turn, and `ManageMemory`, which the model calls to save or change it.
+inject. The Brainstem bundles two agents for exactly that: `ManageMemory`, which the model
+calls to save, and `ContextMemory`, which injects what was saved into every later turn. The
+model decides when to save; watch it do so unasked.
 
 ## Steps
 
-1. Prove forgetting. Send "My favourite colour is teal." Then, in a new session (omit or change
-   `session_id`), ask "What is my favourite colour?" Show that it does not know.
-2. Look at `agents/context_memory_agent.py` and `agents/manage_memory_agent.py` with the learner.
-   Point at where `ManageMemory` writes, and where `ContextMemory` reads and returns context.
-3. Ask the Brainstem to remember: "Remember that my favourite colour is teal." Show the tool call
-   to `ManageMemory` in `agent_logs`.
-4. New session again. Ask the question. Now it knows. Show the `<memory>` block that the
-   Brainstem injected into the system context for that request.
-5. Ask it to forget, and confirm it forgot.
-6. Show where the memory lives on disk and open it. Shared memory is
-   `~/.brainstem/src/rapp_brainstem/.brainstem_data/shared_memories/memory.json`; per-user memory
-   is under `.brainstem_data/memory/<guid>/user_memory.json`. Memory is a file; there is no magic.
+1. Open the store first, so the learner sees where memory lives before anything is in it:
+   `~/.brainstem/src/rapp_brainstem/.brainstem_data/shared_memories/memory.json`. Per-user
+   memory sits beside it under `.brainstem_data/memory/<guid>/user_memory.json`.
+2. Send "My favourite colour is teal." with a `session_id` of your choosing. Read `agent_logs`:
+   the Brainstem called `ManageMemory` and saved a preference without being asked. Open the
+   file again; the entry is there. That is memory being written, by the model's decision.
+3. New session (a different `session_id`): "What is my favourite colour?" It knows. Nothing
+   from the first session was sent; `ContextMemory` injected the stored entry.
+4. Prove the counterfactual. Move the file aside:
+   `mv .../shared_memories/memory.json .../shared_memories/memory.json.aside`. Ask again in a
+   new session. Now it does not know. Move the file back; it knows again. Memory is that file.
+5. Ask it to forget. Read `agent_logs` and the file: `ManageMemory` recorded a retraction, and
+   the original entry is still there. The Brainstem appends; it does not erase. Ask the learner
+   whether a memory system should erase, and who should decide. There is no single right answer.
+6. If they want it gone, delete the entry from the file by hand, or remove the file. Show the
+   next answer no longer mentions teal.
 
 ## Done when
 
-- The learner has seen the same question fail before memory and pass after.
-- They have seen the stored file and the injected block.
+- The learner watched the save happen in `agent_logs` without asking for it.
+- They saw the answer change when the file was moved away and back.
+- They saw the retraction and can say why the entry was still there.
 
 ## Teach-back
 
-1. Why did the model not know the colour in a new session, even though you had just said it?
-   A good answer: the model has no memory; the earlier turn was only in that session's context.
+1. Why did the model know the colour in a new session when nothing from the first was sent?
+   A good answer: `ContextMemory` read the file and injected it into this request's context.
 2. What is the difference between conversation history and memory here?
-   A good answer: history is the turns of one session; memory is stored state injected on request.
+   A good answer: history is the turns of one session; memory is a file, written by a tool call
+   and injected on later requests.
 3. Where would this memory need to live if the agent ran for a team instead of one person?
-   A good answer: somewhere shared and durable, not a file on one laptop.
+   A good answer: somewhere shared and durable, with a decision about who can read and erase it.
 
 Next: `brainstem-share`.
