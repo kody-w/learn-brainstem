@@ -40,4 +40,4 @@ stored context into every turn, and `ManageMemory`, which the model calls to sav
 2. What is the difference between conversation history and memory here?
 3. Where would this memory need to live if the agent ran for a team instead of one person?
 
-Next: `brainstem-workshop`.
+Next: `brainstem-share`.

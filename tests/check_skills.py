@@ -5,8 +5,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REQUIRED_SECTIONS = ("## Done when", "## Teach-back")
+FOREIGN = ("aibast", "microsoft.github.io", "copilot studio", "academy")  # this repo stands on its own
 ok = True
 skills = sorted((ROOT / "skills").glob("*/SKILL.md"))
+readme = (ROOT / "README.md").read_text(encoding="utf-8").lower()
+for word in ("aibast", "microsoft.github.io", "copilot studio", "academy"):
+    if word in readme:
+        print(f"README.md: references {word!r}"); ok = False
 if len(skills) < 7:
     print(f"expected at least 7 skills, found {len(skills)}"); ok = False
 for path in skills:
@@ -33,6 +38,9 @@ for path in skills:
         print(f"{path}: description too short"); ok = False
     if "license: MIT" not in fm:
         print(f"{path}: license missing"); ok = False
+    for word in FOREIGN:
+        if word in text.lower():
+            print(f"{path}: references {word!r}; this repo is separate from any library"); ok = False
     for section in REQUIRED_SECTIONS:
         if path.parent.name != "learn-brainstem" and section not in text:
             print(f"{path}: missing {section}"); ok = False

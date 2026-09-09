@@ -20,8 +20,8 @@ loop locally and borrows GitHub Copilot as the model, so there is no key to mana
 1. Detect the operating system and check for Python 3.11 or newer and Git. Report what is
    missing. The installer fixes most of it; say so.
 2. Install:
-   - macOS or Linux: `curl -fsSL https://microsoft.github.io/aibast-agents-library/install.sh | bash`
-   - Windows PowerShell: `irm https://microsoft.github.io/aibast-agents-library/install.ps1 | iex`
+   - macOS or Linux: `curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash`
+   - Windows PowerShell: `irm https://kody-w.github.io/rapp-installer/install.ps1 | iex`
    The installer clones the source to `~/.brainstem/src`, creates a virtual environment, and
    starts the server on port 7071.
 3. If the server asks for GitHub sign-in, hand the device code to the learner. That is the one
