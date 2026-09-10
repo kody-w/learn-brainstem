@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.1 (2026-09-10)
+
+- `brainstem-ship` accepts three inputs: the learner's own build, a ready-made harness
+  workspace from an industry solution library (deploys unchanged with `--workspace-dir`), or
+  both. Verified by packing a library solution with `pac copilot pack`: the guard's
+  `cliagent-1.0.0` template came out as required.
+
 ## 1.3.0 (2026-09-09)
 
 - New `brainstem-ship`: the skill runs in the GitHub Copilot harness on the learner's machine

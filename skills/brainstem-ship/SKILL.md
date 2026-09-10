@@ -4,7 +4,7 @@ description: Push the learner's skill into the Microsoft AI ecosystem with copil
 license: MIT
 metadata:
   author: kody-w
-  version: "1.0.0"
+  version: "1.1.0"
   path: brainstem-ship
 ---
 
@@ -17,6 +17,23 @@ GitHub Copilot harness on their machine, becomes the skill of a Copilot Studio a
 on that same harness, and from there is reachable in Teams and Microsoft 365 Copilot. A harness
 is the runtime that reads skills and calls tools; the file does not change, the harness does.
 `copilot-harness-sdk` is one client and one deploy script for all of it: https://github.com/kody-w/copilot-harness-sdk
+
+## What you can ship
+
+Three inputs, one path. Decide which the learner has before choosing a rung.
+
+- **Their own build.** The skill folder from `brainstem-share`, or any single-file agent they
+  wrote or took from the registry, turned into a skill with `rapp_skills.py to-skill`. Rung 1
+  runs it as is. Rung 2 wraps it in a two-file workspace, described below.
+- **A ready-made solution workspace.** Industry solution libraries ship a Copilot Studio folder
+  per solution, often named `copilot-studio/`, holding `settings.mcs.yml` plus `behaviors/` and
+  sometimes `capabilities/`. If its settings say `template: cliagent-1.0.0` and
+  `recognizer.kind: CLICopilotRecognizer`, it is a harness workspace and deploys unchanged:
+  `--workspace-dir <that folder>` with `--publisher-prefix` set to the prefix already at the front
+  of its `schemaName` (the part before the underscore). Display name, schema name, instructions,
+  and skills come from the folder. The guard line still has to print `cliagent-1.0.0`.
+- **Both.** Deploy a library solution, then add the learner's own skill as one more
+  `behaviors/<name>.mcs.yml` in a copy of that folder. Their file rides inside a proven agent.
 
 ## Before you start
 
