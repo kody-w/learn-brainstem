@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.2 (2026-09-10)
+
+- Proved live, end to end on one machine: `brainstem-first-agent` (tool written, loaded without
+  restart, called from chat), `brainstem-share` (to-skill, prove PASS, check, run with no server),
+  `brainstem-anywhere` (the same skill answered inside GitHub Copilot CLI), and ship rung 1. All
+  four gave the identical answer. Ship rung 2 now names the device-code sign-in as the learner's step.
+
 ## 1.3.1 (2026-09-10)
 
 - `brainstem-ship` accepts three inputs: the learner's own build, a ready-made harness

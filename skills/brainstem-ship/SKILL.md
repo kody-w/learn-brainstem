@@ -4,7 +4,7 @@ description: Push the learner's skill into the Microsoft AI ecosystem with copil
 license: MIT
 metadata:
   author: kody-w
-  version: "1.1.0"
+  version: "1.1.1"
   path: brainstem-ship
 ---
 
@@ -101,11 +101,12 @@ whose `content` is a `SKILL.md`, byte for byte.
 
    ```bash
    az login
-   pac auth create --environment https://<org>.crm.dynamics.com/
+   pac auth create --deviceCode --environment https://<org>.crm.dynamics.com/
    npm run deploy:harness -- --workspace-dir ./workspace --name "<display name>" \
      --publisher-prefix <prefix> --environment https://<org>.crm.dynamics.com/
    ```
 
+   `pac auth create` prints a device code; the learner signs in with it, the one step that is theirs.
    The script packs the solution, refuses the zip unless it is the harness template, imports,
    writes the instructions onto the live record, publishes, and reads the record back. Show the
    final verification line: template, recognizer, model, instruction length.
