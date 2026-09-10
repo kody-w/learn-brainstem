@@ -4,7 +4,7 @@ description: Push the learner's skill into the Microsoft AI ecosystem with copil
 license: MIT
 metadata:
   author: kody-w
-  version: "1.1.1"
+  version: "1.2.0"
   path: brainstem-ship
 ---
 
@@ -110,6 +110,14 @@ whose `content` is a `SKILL.md`, byte for byte.
    The script packs the solution, refuses the zip unless it is the harness template, imports,
    writes the instructions onto the live record, publishes, and reads the record back. Show the
    final verification line: template, recognizer, model, instruction length.
+   Two things that bite: the Dataverse token comes from `az`, so `az` must be signed into the
+   same tenant as the pac profile (`az login --tenant <that tenant>`), or step 5 stops with
+   "not a member of the organization" after the import has already succeeded. And if
+   `pac copilot publish --bot <schema name>` crashes, publish by the bot id shown in
+   `pac copilot list --environment <url>`; that works.
+   Verify what landed without the portal: `pac copilot clone --bot <schema name> --environment
+   <url> --output-dir ./clone` pulls the live agent back as files. Count `behaviors/` and read the
+   instructions in `settings.mcs.yml`.
 3. Open the agent in Copilot Studio. Under Skills the learner's file is there. Ask it in the
    test pane for the same thing as rung 1.
 

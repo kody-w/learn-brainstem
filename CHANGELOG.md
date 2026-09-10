@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.3 (2026-09-10)
+
+- Ship rung 2 proved live: an industry solution workspace deployed through the SDK's harness-only
+  script into a real environment as a `cliagent-1.0.0` agent with six skills, two knowledge files
+  and its instructions, then published and cloned back for verification. The lesson now names the
+  two snags met on the way: the Dataverse token tenant, and publishing by bot id when pac crashes.
+
 ## 1.3.2 (2026-09-10)
 
 - Proved live, end to end on one machine: `brainstem-first-agent` (tool written, loaded without
