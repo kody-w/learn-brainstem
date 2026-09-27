@@ -1,5 +1,9 @@
 # learn-brainstem
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/learn-brainstem.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/learn-brainstem.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 Learn how AI agents work by running one on your own machine. Give your AI these skills and it
 teaches you, one concept at a time, using the RAPP Brainstem as the lab bench.
 
